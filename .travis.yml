@@ -1,0 +1,12 @@
+sudo: required
+
+arch:
+- arm64
+
+services:
+- docker
+
+script:
+  - docker build -t odidev/maven-resource:$TRAVIS_BRANCH-$TRAVIS_CPU_ARCH .
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  - docker push odidev/maven-resource:$TRAVIS_BRANCH-$TRAVIS_CPU_ARCH
